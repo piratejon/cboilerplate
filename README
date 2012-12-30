@@ -1,0 +1,1 @@
+cboilerplate allows me to quickly initialize a C project with autotools and testing. It includes a test framework that fills the gap between MinUnit (http://www.jera.com/techinfo/jtns/jtn002.html) and Check (http://check.sf.net).
