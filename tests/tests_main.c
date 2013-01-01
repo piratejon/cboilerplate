@@ -1,6 +1,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 
@@ -13,6 +14,13 @@ int passed = 0;
 int tested = 0;
 
 pid_t kidpid;
+
+void wait_attach ( void )
+{
+  printf("PID %d ready for attach\n", getpid());
+  fflush(stdout);
+  while(1); // increment instruction pointer to continue
+}
 
 void send_message ( char * message )
 {
