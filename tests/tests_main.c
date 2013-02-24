@@ -33,7 +33,7 @@ void send_message ( char * message )
 
 char * recv_message ( void )
 {
-  char * message;
+  char * message = NULL;
   if ( read ( pipefd[0], &len, sizeof(len) ) == sizeof(len) )
   {
     int i = 0, bytes_read;
@@ -81,7 +81,6 @@ int execute_test ( char * test_name, void(*test_func)(void) )
   }
   else
   {
-    char * message = NULL;
     int kid_status;
 
     tested ++;
@@ -90,14 +89,12 @@ int execute_test ( char * test_name, void(*test_func)(void) )
 
     if ( WIFEXITED ( kid_status ) && WEXITSTATUS ( kid_status ) != 0 )
     {
-      printf("Test %s (%d): ", test_name, kidpid);
-
       if ( WIFEXITED ( kid_status ) )
       {
         char * message = recv_message ( );
-        printf("'%s'\n", message);
+        printf("%s\n", message);
         free ( message );
-        printf("  exited with status %d\n", WEXITSTATUS ( kid_status ) );
+        printf("  PID %d exited with status %d\n", kidpid, WEXITSTATUS ( kid_status ) );
       }
     }
     else if ( WIFSIGNALED ( kid_status ) )

@@ -10,7 +10,7 @@ void test_succeeded ( void );
 void test_failed ( char * );
 void wait_attach ( );
 
-#define ASSERT(x, msg) do { if (!(x)) { char buf[100]; snprintf(buf, 100, "%s:%d:%s(): %s", __FILE__, __LINE__, __func__, msg); test_failed(buf); } else { test_succeeded(); } } while(0)
+#define ASSERT(x, msg) do { if (!(x)) { char buf[200]; snprintf(buf, sizeof(buf), "%s:%d:%s(): %s", __FILE__, __LINE__, __func__, msg); test_failed(buf); } else { test_succeeded(); } } while(0)
 
 #define TEST(x) do { if ( !execute_test(#x, x) ) { return; } } while(0)
 
