@@ -18,8 +18,12 @@ Usage
 
         AC_CONFIG_SRCDIR([src/example.c])
 
+3\. Configure src:
+  * In Makefile.am, replace example with your project name everywhere.
+  * Also in Makefile.am keep libwhatever_la_SOURCES up-to-date with your files ( *.c and *.h)
+  * Also in Makefile.am keep whatever_SOURCES up-to-date with your source files ( *.c)
 
-3\. Set up a test:
+4\. Set up a test:
   * Edit tests/Makefile.am and replace "example" with your project name everywhere
   * Create tests/tests_yourprojectname.c like so:
 
@@ -70,13 +74,15 @@ void do_tests ( void ) // this function is mandatory
 
   * You are done setting up at this point!
 
-4\. Compile and run:
+5\. Compile and run:
 
 ```bash
 $ autoreconf -i -f
 $ ./configure
 $ make check
 ```
+
+6\. I guess it's a good idea to remove the [remote "origin"] section of .git/config and/or replace it with one that is meaningful for your project.
 
 Demonstration
 -------------
