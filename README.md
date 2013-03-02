@@ -11,7 +11,9 @@ Usage
 
 2\. Setup configure.ac:
   * Change the AC_INIT line in configure.ac to have your project name, version, and email.
+        AC_INIT([example], [0.1], [js AT piratejon DOT com])
   * Provide a unique filename in the src folder on the AC_CONFIG_SRCDIR line
+        AC_CONFIG_SRCDIR([src/example.c])
 
 3\. Set up a test:
   * Edit tests/Makefile.am and replace "example" with your project name everywhere
@@ -19,9 +21,12 @@ Usage
 
 ```c
 /** 
-  tests.h is required for TEST and ASSERT but you can include arbitrary headers too. You can include stdlib.h or whatever you want. I haven't tried using stdin and stdout though; it might mess with the pipes or something so for now I'm calling it "unsupported".
+  tests.h is required for TEST and ASSERT but you can include arbitrary
+  headers too. You can include stdlib.h or whatever you want. I haven't
+  tried using stdin and stdout though; it might mess with the pipes or
+  something so for now I'm calling it "unsupported".
   **/
-// #include "example.h"
+// #include <stdlib.h>
 #include "tests.h"
 
 void sanity_check_zero ( void )
@@ -47,14 +52,15 @@ void do_tests ( void ) // this function is mandatory
     TEST takes the name of a test function, which looks like
     "void testfunctionname(void)".
 
-    Each function called by TEST is run inside a fork(). The failure of one does not prevent another from running (unless you just blow everything compeletely up and the machine grinds to a halt!)
+    Each function called by TEST is run inside a fork(). The failure of one
+    does not prevent another from running (unless you just blow everything
+    compeletely up and the machine grinds to a halt!)
    **/
 
   TEST ( sanity_check_zero );
   TEST ( sanity_check_false );
 
   // Make it a real party and invite as many tests as you want!
-
 }
 ```
 
