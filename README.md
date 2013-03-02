@@ -14,7 +14,7 @@ Usage
 3. Set up a test:
   * Edit tests/Makefile.am and replace "example" with your project name everywhere
   * Create tests/tests_yourprojectname.c like so:
-  ```C
+```C
 /** 
   tests.h is required for TEST and ASSERT but you can include arbitrary headers too. You can include stdlib.h or whatever you want. I haven't tried using stdin and stdout though; it might mess with the pipes or something so for now I'm calling it "unsupported".
   **/
@@ -53,14 +53,14 @@ void do_tests ( void ) // this function is mandatory
   // Make it a real party and invite as many tests as you want!
 
 }
-  ```
+```
   * You are done setting up at this point!
 4. Compile and run:
-  ```bash
-  $ autoreconf -i -f
-  $ ./configure
-  $ make check
-  ```
+```bash
+$ autoreconf -i -f
+$ ./configure
+$ make check
+```
 
 Demonstration
 -------------
