@@ -11,9 +11,13 @@ Usage
 
 2\. Setup configure.ac:
   * Change the AC_INIT line in configure.ac to have your project name, version, and email.
+
         AC_INIT([example], [0.1], [js AT piratejon DOT com])
+
   * Provide a unique filename in the src folder on the AC_CONFIG_SRCDIR line
+
         AC_CONFIG_SRCDIR([src/example.c])
+
 
 3\. Set up a test:
   * Edit tests/Makefile.am and replace "example" with your project name everywhere
