@@ -8,9 +8,11 @@ cboilerplate allows me to quickly initialize a C project with autotools and test
 Usage
 -----
 1\. Fork/clone
+
 2\. Setup configure.ac:
   * Change the AC_INIT line in configure.ac to have your project name, version, and email.
   * Provide a unique filename in the src folder on the AC_CONFIG_SRCDIR line
+
 3\. Set up a test:
   * Edit tests/Makefile.am and replace "example" with your project name everywhere
   * Create tests/tests_yourprojectname.c like so:
@@ -20,7 +22,7 @@ Usage
   tests.h is required for TEST and ASSERT but you can include arbitrary headers too. You can include stdlib.h or whatever you want. I haven't tried using stdin and stdout though; it might mess with the pipes or something so for now I'm calling it "unsupported".
   **/
 // #include "example.h"
-\#include "tests.h"
+#include "tests.h"
 
 void sanity_check_zero ( void )
 {
@@ -60,9 +62,11 @@ void do_tests ( void ) // this function is mandatory
 
 4\. Compile and run:
 
-        $ autoreconf -i -f
-        $ ./configure
-        $ make check
+```bash
+$ autoreconf -i -f
+$ ./configure
+$ make check
+```
 
 Demonstration
 -------------
