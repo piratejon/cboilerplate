@@ -7,7 +7,64 @@ cboilerplate allows me to quickly initialize a C project with autotools and test
 
 Usage
 -----
-Here is what I use after I check this out:
+1. Fork/clone
+2. Setup configure.ac:
+  * Change the AC_INIT line in configure.ac to have your project name, version, and email.
+  * Provide a unique filename in the src folder on the AC_CONFIG_SRCDIR line
+3. Set up a test:
+  * Edit tests/Makefile.am and replace "example" with your project name everywhere
+  * Create tests/tests_yourprojectname.c like so:
+  ```C
+/** 
+  tests.h is required for TEST and ASSERT but you can include arbitrary headers too. You can include stdlib.h or whatever you want. I haven't tried using stdin and stdout though; it might mess with the pipes or something so for now I'm calling it "unsupported".
+  **/
+// #include "example.h"
+#include "tests.h"
+
+void sanity_check_zero ( void )
+{
+  ASSERT ( 0 == 0, "Zero failed to be equal to zero." );
+}
+
+void sanity_check_one ( void )
+{
+  ASSERT ( 1 == 1, "One failed to be equal to one." );
+  /**
+   You can of course put multiple ASSERTs in each test function and it will
+   terminate on the first failure.
+
+   Each ASSERT must have both parameters but I guess the second one could
+   be "" if you wanted. I haven't tried that yet!
+   **/
+}
+
+void do_tests ( void ) // this function is mandatory
+{
+  /**
+    TEST takes the name of a test function, which looks like
+    "void testfunctionname(void)".
+
+    Each function called by TEST is run inside a fork(). The failure of one does not prevent another from running (unless you just blow everything compeletely up and the machine grinds to a halt!)
+   **/
+
+  TEST ( sanity_check_zero );
+  TEST ( sanity_check_false );
+
+  // Make it a real party and invite as many tests as you want!
+
+}
+  ```
+  * You are done setting up at this point!
+4. Compile and run:
+  ```bash
+  $ autoreconf -i -f
+  $ ./configure
+  $ make check
+  ```
+
+Demonstration
+-------------
+Here is what happens using the tests/tests_example.c:
 ```bash
 $ autoreconf -i -f
 $ ./configure
@@ -26,7 +83,7 @@ Please report to js AT piratejon DOT com
 ... 
 ```
 
-The "example" tests include two intentional failures that illustrate the behavior of the test framework when a segfault occurs and when an assert fails. Therefore it is normal and expected to see 4/6 passing when you run this. You may not want or need to keep those when you write your own tests.
+Two intentional failures illustrate the behavior of the test framework when a segfault occurs and when an assert fails. Therefore it is normal and expected to see 4/6 passing when you run this. You may not want or need to keep those when you write your own tests.
 
 License
 -------
